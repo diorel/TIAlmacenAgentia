@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventarioTIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asignacion">
+          <Key>
+            <PropertyRef Name="AsignacionID" />
+          </Key>
+          <Property Name="AsignacionID" Type="int" Nullable="false" />
+          <Property Name="FechaAlta" Type="date" Nullable="false" />
+          <Property Name="UsuarioAlta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioResponsable" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioTestigo" Type="varchar" MaxLength="50" />
+          <Property Name="ValorPagare" Type="money" />
+          <Property Name="ObservacionAlta" Type="varchar(max)" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dispositivo">
+          <Key>
+            <PropertyRef Name="DispositivoID" />
+          </Key>
+          <Property Name="DispositivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModeloID" Type="smallint" Nullable="false" />
+          <Property Name="NumeroSerie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Espesificaciones" Type="varchar(max)" />
+          <Property Name="FechaCompra" Type="date" />
+          <Property Name="PrecioCompra" Type="money" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dispositivo_Estatus">
+          <Key>
+            <PropertyRef Name="Dispositivo_EstatusID" />
+          </Key>
+          <Property Name="Dispositivo_EstatusID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DispostivoID" Type="int" Nullable="false" />
+          <Property Name="EstatusID" Type="tinyint" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="EstatusID" />
+          </Key>
+          <Property Name="EstatusID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="140" Nullable="false" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="HistorialID" />
+          </Key>
+          <Property Name="HistorialID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DispositivoID" Type="int" Nullable="false" />
+          <Property Name="FechaAlta" Type="date" Nullable="false" />
+          <Property Name="UsuarioAlta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioResponsable" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UsuarioTestigo" Type="varchar" MaxLength="50" />
+          <Property Name="ValorPagare" Type="money" />
+          <Property Name="ObservacionAlta" Type="varchar(max)" />
+          <Property Name="UsuarioBaja" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaBaja" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ObservacionBaja" Type="varchar(max)" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="140" Nullable="false" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="ModeloID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MarcaID" Type="smallint" Nullable="false" />
+          <Property Name="TipoDispostivoID" Type="tinyint" Nullable="false" />
+          <Property Name="EstatusID" Type="tinyint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Espesificaciones" Type="varchar(max)" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDispositivo">
+          <Key>
+            <PropertyRef Name="TipoDispositivoID" />
+          </Key>
+          <Property Name="TipoDispositivoID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="140" Nullable="false" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Asignacio__Asign__7F2BE32F">
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="1" />
+          <End Role="Asignacion" Type="Self.Asignacion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo">
+              <PropertyRef Name="DispositivoID" />
+            </Principal>
+            <Dependent Role="Asignacion">
+              <PropertyRef Name="AsignacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Dispo__6383C8BA">
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="1" />
+          <End Role="Dispositivo_Estatus" Type="Self.Dispositivo_Estatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo">
+              <PropertyRef Name="DispositivoID" />
+            </Principal>
+            <Dependent Role="Dispositivo_Estatus">
+              <PropertyRef Name="DispostivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Estat__6477ECF3">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
+          <End Role="Dispositivo_Estatus" Type="Self.Dispositivo_Estatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="EstatusID" />
+            </Principal>
+            <Dependent Role="Dispositivo_Estatus">
+              <PropertyRef Name="EstatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Model__5DCAEF64">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Dispositivo">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historial__Dispo__08B54D69">
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo">
+              <PropertyRef Name="DispositivoID" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="DispositivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modelo__EstatusI__571DF1D5">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="EstatusID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="EstatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modelo__MarcaID__5535A963">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modelo__TipoDisp__5629CD9C">
+          <End Role="TipoDispositivo" Type="Self.TipoDispositivo" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDispositivo">
+              <PropertyRef Name="TipoDispositivoID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="TipoDispostivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventarioTIModelStoreContainer">
+          <EntitySet Name="Asignacion" EntityType="Self.Asignacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispositivo" EntityType="Self.Dispositivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispositivo_Estatus" EntityType="Self.Dispositivo_Estatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDispositivo" EntityType="Self.TipoDispositivo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Asignacio__Asign__7F2BE32F" Association="Self.FK__Asignacio__Asign__7F2BE32F">
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+            <End Role="Asignacion" EntitySet="Asignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Dispo__6383C8BA" Association="Self.FK__Dispositi__Dispo__6383C8BA">
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+            <End Role="Dispositivo_Estatus" EntitySet="Dispositivo_Estatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Estat__6477ECF3" Association="Self.FK__Dispositi__Estat__6477ECF3">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Dispositivo_Estatus" EntitySet="Dispositivo_Estatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Model__5DCAEF64" Association="Self.FK__Dispositi__Model__5DCAEF64">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historial__Dispo__08B54D69" Association="Self.FK__Historial__Dispo__08B54D69">
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+            <End Role="Historial" EntitySet="Historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modelo__EstatusI__571DF1D5" Association="Self.FK__Modelo__EstatusI__571DF1D5">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modelo__MarcaID__5535A963" Association="Self.FK__Modelo__MarcaID__5535A963">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modelo__TipoDisp__5629CD9C" Association="Self.FK__Modelo__TipoDisp__5629CD9C">
+            <End Role="TipoDispositivo" EntitySet="TipoDispositivo" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventarioTIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asignacion">
+          <Key>
+            <PropertyRef Name="AsignacionID" />
+          </Key>
+          <Property Name="AsignacionID" Type="Int32" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UsuarioAlta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioTestigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorPagare" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ObservacionAlta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dispositivo" Relationship="Self.FK__Asignacio__Asign__7F2BE32F" FromRole="Asignacion" ToRole="Dispositivo" />
+        </EntityType>
+        <EntityType Name="Dispositivo">
+          <Key>
+            <PropertyRef Name="DispositivoID" />
+          </Key>
+          <Property Name="DispositivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModeloID" Type="Int16" Nullable="false" />
+          <Property Name="NumeroSerie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Espesificaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCompra" Type="DateTime" Precision="0" />
+          <Property Name="PrecioCompra" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Asignacion" Relationship="Self.FK__Asignacio__Asign__7F2BE32F" FromRole="Dispositivo" ToRole="Asignacion" />
+          <NavigationProperty Name="Dispositivo_Estatus" Relationship="Self.FK__Dispositi__Dispo__6383C8BA" FromRole="Dispositivo" ToRole="Dispositivo_Estatus" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK__Dispositi__Model__5DCAEF64" FromRole="Dispositivo" ToRole="Modelo" />
+          <NavigationProperty Name="Historial" Relationship="Self.FK__Historial__Dispo__08B54D69" FromRole="Dispositivo" ToRole="Historial" />
+        </EntityType>
+        <EntityType Name="Dispositivo_Estatus">
+          <Key>
+            <PropertyRef Name="Dispositivo_EstatusID" />
+          </Key>
+          <Property Name="Dispositivo_EstatusID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DispostivoID" Type="Int32" Nullable="false" />
+          <Property Name="EstatusID" Type="Byte" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dispositivo" Relationship="Self.FK__Dispositi__Dispo__6383C8BA" FromRole="Dispositivo_Estatus" ToRole="Dispositivo" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK__Dispositi__Estat__6477ECF3" FromRole="Dispositivo_Estatus" ToRole="Estatus" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="EstatusID" />
+          </Key>
+          <Property Name="EstatusID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="140" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus1" Type="Boolean" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Dispositivo_Estatus" Relationship="Self.FK__Dispositi__Estat__6477ECF3" FromRole="Estatus" ToRole="Dispositivo_Estatus" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK__Modelo__EstatusI__571DF1D5" FromRole="Estatus" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="Historial">
+          <Key>
+            <PropertyRef Name="HistorialID" />
+          </Key>
+          <Property Name="HistorialID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DispositivoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UsuarioAlta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioTestigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorPagare" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ObservacionAlta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioBaja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaBaja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ObservacionBaja" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dispositivo" Relationship="Self.FK__Historial__Dispo__08B54D69" FromRole="Historial" ToRole="Dispositivo" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="MarcaID" />
+          </Key>
+          <Property Name="MarcaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="140" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK__Modelo__MarcaID__5535A963" FromRole="Marca" ToRole="Modelo" />
+        </EntityType>
+        <EntityType Name="Modelo">
+          <Key>
+            <PropertyRef Name="ModeloID" />
+          </Key>
+          <Property Name="ModeloID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarcaID" Type="Int16" Nullable="false" />
+          <Property Name="TipoDispostivoID" Type="Byte" Nullable="false" />
+          <Property Name="EstatusID" Type="Byte" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Espesificaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dispositivo" Relationship="Self.FK__Dispositi__Model__5DCAEF64" FromRole="Modelo" ToRole="Dispositivo" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK__Modelo__EstatusI__571DF1D5" FromRole="Modelo" ToRole="Estatus" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK__Modelo__MarcaID__5535A963" FromRole="Modelo" ToRole="Marca" />
+          <NavigationProperty Name="TipoDispositivo" Relationship="Self.FK__Modelo__TipoDisp__5629CD9C" FromRole="Modelo" ToRole="TipoDispositivo" />
+        </EntityType>
+        <EntityType Name="TipoDispositivo">
+          <Key>
+            <PropertyRef Name="TipoDispositivoID" />
+          </Key>
+          <Property Name="TipoDispositivoID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="140" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Modelo" Relationship="Self.FK__Modelo__TipoDisp__5629CD9C" FromRole="TipoDispositivo" ToRole="Modelo" />
+        </EntityType>
+        <Association Name="FK__Asignacio__Asign__7F2BE32F">
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="1" />
+          <End Role="Asignacion" Type="Self.Asignacion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo">
+              <PropertyRef Name="DispositivoID" />
+            </Principal>
+            <Dependent Role="Asignacion">
+              <PropertyRef Name="AsignacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Dispo__6383C8BA">
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="1" />
+          <End Role="Dispositivo_Estatus" Type="Self.Dispositivo_Estatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo">
+              <PropertyRef Name="DispositivoID" />
+            </Principal>
+            <Dependent Role="Dispositivo_Estatus">
+              <PropertyRef Name="DispostivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Model__5DCAEF64">
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="1" />
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelo">
+              <PropertyRef Name="ModeloID" />
+            </Principal>
+            <Dependent Role="Dispositivo">
+              <PropertyRef Name="ModeloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Historial__Dispo__08B54D69">
+          <End Role="Dispositivo" Type="Self.Dispositivo" Multiplicity="1" />
+          <End Role="Historial" Type="Self.Historial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo">
+              <PropertyRef Name="DispositivoID" />
+            </Principal>
+            <Dependent Role="Historial">
+              <PropertyRef Name="DispositivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Estat__6477ECF3">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
+          <End Role="Dispositivo_Estatus" Type="Self.Dispositivo_Estatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="EstatusID" />
+            </Principal>
+            <Dependent Role="Dispositivo_Estatus">
+              <PropertyRef Name="EstatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modelo__EstatusI__571DF1D5">
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estatus">
+              <PropertyRef Name="EstatusID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="EstatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modelo__MarcaID__5535A963">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="MarcaID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="MarcaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modelo__TipoDisp__5629CD9C">
+          <End Role="TipoDispositivo" Type="Self.TipoDispositivo" Multiplicity="1" />
+          <End Role="Modelo" Type="Self.Modelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDispositivo">
+              <PropertyRef Name="TipoDispositivoID" />
+            </Principal>
+            <Dependent Role="Modelo">
+              <PropertyRef Name="TipoDispostivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventarioTIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asignacion" EntityType="Self.Asignacion" />
+          <EntitySet Name="Dispositivo" EntityType="Self.Dispositivo" />
+          <EntitySet Name="Dispositivo_Estatus" EntityType="Self.Dispositivo_Estatus" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" />
+          <EntitySet Name="Historial" EntityType="Self.Historial" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="Modelo" EntityType="Self.Modelo" />
+          <EntitySet Name="TipoDispositivo" EntityType="Self.TipoDispositivo" />
+          <AssociationSet Name="FK__Asignacio__Asign__7F2BE32F" Association="Self.FK__Asignacio__Asign__7F2BE32F">
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+            <End Role="Asignacion" EntitySet="Asignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Dispo__6383C8BA" Association="Self.FK__Dispositi__Dispo__6383C8BA">
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+            <End Role="Dispositivo_Estatus" EntitySet="Dispositivo_Estatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Model__5DCAEF64" Association="Self.FK__Dispositi__Model__5DCAEF64">
+            <End Role="Modelo" EntitySet="Modelo" />
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Historial__Dispo__08B54D69" Association="Self.FK__Historial__Dispo__08B54D69">
+            <End Role="Dispositivo" EntitySet="Dispositivo" />
+            <End Role="Historial" EntitySet="Historial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Estat__6477ECF3" Association="Self.FK__Dispositi__Estat__6477ECF3">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Dispositivo_Estatus" EntitySet="Dispositivo_Estatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modelo__EstatusI__571DF1D5" Association="Self.FK__Modelo__EstatusI__571DF1D5">
+            <End Role="Estatus" EntitySet="Estatus" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modelo__MarcaID__5535A963" Association="Self.FK__Modelo__MarcaID__5535A963">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modelo__TipoDisp__5629CD9C" Association="Self.FK__Modelo__TipoDisp__5629CD9C">
+            <End Role="TipoDispositivo" EntitySet="TipoDispositivo" />
+            <End Role="Modelo" EntitySet="Modelo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventarioTIModelStoreContainer" CdmEntityContainer="InventarioTIEntities">
+          <EntitySetMapping Name="Asignacion">
+            <EntityTypeMapping TypeName="InventarioTIModel.Asignacion">
+              <MappingFragment StoreEntitySet="Asignacion">
+                <ScalarProperty Name="AsignacionID" ColumnName="AsignacionID" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+                <ScalarProperty Name="UsuarioResponsable" ColumnName="UsuarioResponsable" />
+                <ScalarProperty Name="UsuarioTestigo" ColumnName="UsuarioTestigo" />
+                <ScalarProperty Name="ValorPagare" ColumnName="ValorPagare" />
+                <ScalarProperty Name="ObservacionAlta" ColumnName="ObservacionAlta" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispositivo">
+            <EntityTypeMapping TypeName="InventarioTIModel.Dispositivo">
+              <MappingFragment StoreEntitySet="Dispositivo">
+                <ScalarProperty Name="DispositivoID" ColumnName="DispositivoID" />
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="NumeroSerie" ColumnName="NumeroSerie" />
+                <ScalarProperty Name="Espesificaciones" ColumnName="Espesificaciones" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispositivo_Estatus">
+            <EntityTypeMapping TypeName="InventarioTIModel.Dispositivo_Estatus">
+              <MappingFragment StoreEntitySet="Dispositivo_Estatus">
+                <ScalarProperty Name="Dispositivo_EstatusID" ColumnName="Dispositivo_EstatusID" />
+                <ScalarProperty Name="DispostivoID" ColumnName="DispostivoID" />
+                <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estatus">
+            <EntityTypeMapping TypeName="InventarioTIModel.Estatus">
+              <MappingFragment StoreEntitySet="Estatus">
+                <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historial">
+            <EntityTypeMapping TypeName="InventarioTIModel.Historial">
+              <MappingFragment StoreEntitySet="Historial">
+                <ScalarProperty Name="HistorialID" ColumnName="HistorialID" />
+                <ScalarProperty Name="DispositivoID" ColumnName="DispositivoID" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+                <ScalarProperty Name="UsuarioResponsable" ColumnName="UsuarioResponsable" />
+                <ScalarProperty Name="UsuarioTestigo" ColumnName="UsuarioTestigo" />
+                <ScalarProperty Name="ValorPagare" ColumnName="ValorPagare" />
+                <ScalarProperty Name="ObservacionAlta" ColumnName="ObservacionAlta" />
+                <ScalarProperty Name="UsuarioBaja" ColumnName="UsuarioBaja" />
+                <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
+                <ScalarProperty Name="ObservacionBaja" ColumnName="ObservacionBaja" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="InventarioTIModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modelo">
+            <EntityTypeMapping TypeName="InventarioTIModel.Modelo">
+              <MappingFragment StoreEntitySet="Modelo">
+                <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="TipoDispostivoID" ColumnName="TipoDispostivoID" />
+                <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Espesificaciones" ColumnName="Espesificaciones" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDispositivo">
+            <EntityTypeMapping TypeName="InventarioTIModel.TipoDispositivo">
+              <MappingFragment StoreEntitySet="TipoDispositivo">
+                <ScalarProperty Name="TipoDispositivoID" ColumnName="TipoDispositivoID" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,74 @@
+﻿@model AlmacenTI.Models.Dispositivo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Dispositivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Espesificaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Espesificaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaHora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaHora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asignacion.UsuarioAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asignacion.UsuarioAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DispositivoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

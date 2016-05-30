@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventarioTIModelStoreContainer" CdmEntityContainer="InventarioTIEntities">
+    <EntitySetMapping Name="Asignacion">
+      <EntityTypeMapping TypeName="InventarioTIModel.Asignacion">
+        <MappingFragment StoreEntitySet="Asignacion">
+          <ScalarProperty Name="AsignacionID" ColumnName="AsignacionID" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+          <ScalarProperty Name="UsuarioResponsable" ColumnName="UsuarioResponsable" />
+          <ScalarProperty Name="UsuarioTestigo" ColumnName="UsuarioTestigo" />
+          <ScalarProperty Name="ValorPagare" ColumnName="ValorPagare" />
+          <ScalarProperty Name="ObservacionAlta" ColumnName="ObservacionAlta" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dispositivo">
+      <EntityTypeMapping TypeName="InventarioTIModel.Dispositivo">
+        <MappingFragment StoreEntitySet="Dispositivo">
+          <ScalarProperty Name="DispositivoID" ColumnName="DispositivoID" />
+          <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+          <ScalarProperty Name="NumeroSerie" ColumnName="NumeroSerie" />
+          <ScalarProperty Name="Espesificaciones" ColumnName="Espesificaciones" />
+          <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+          <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dispositivo_Estatus">
+      <EntityTypeMapping TypeName="InventarioTIModel.Dispositivo_Estatus">
+        <MappingFragment StoreEntitySet="Dispositivo_Estatus">
+          <ScalarProperty Name="Dispositivo_EstatusID" ColumnName="Dispositivo_EstatusID" />
+          <ScalarProperty Name="DispostivoID" ColumnName="DispostivoID" />
+          <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estatus">
+      <EntityTypeMapping TypeName="InventarioTIModel.Estatus">
+        <MappingFragment StoreEntitySet="Estatus">
+          <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estatus1" ColumnName="Estatus" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Historial">
+      <EntityTypeMapping TypeName="InventarioTIModel.Historial">
+        <MappingFragment StoreEntitySet="Historial">
+          <ScalarProperty Name="HistorialID" ColumnName="HistorialID" />
+          <ScalarProperty Name="DispositivoID" ColumnName="DispositivoID" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="UsuarioAlta" ColumnName="UsuarioAlta" />
+          <ScalarProperty Name="UsuarioResponsable" ColumnName="UsuarioResponsable" />
+          <ScalarProperty Name="UsuarioTestigo" ColumnName="UsuarioTestigo" />
+          <ScalarProperty Name="ValorPagare" ColumnName="ValorPagare" />
+          <ScalarProperty Name="ObservacionAlta" ColumnName="ObservacionAlta" />
+          <ScalarProperty Name="UsuarioBaja" ColumnName="UsuarioBaja" />
+          <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
+          <ScalarProperty Name="ObservacionBaja" ColumnName="ObservacionBaja" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marca">
+      <EntityTypeMapping TypeName="InventarioTIModel.Marca">
+        <MappingFragment StoreEntitySet="Marca">
+          <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modelo">
+      <EntityTypeMapping TypeName="InventarioTIModel.Modelo">
+        <MappingFragment StoreEntitySet="Modelo">
+          <ScalarProperty Name="ModeloID" ColumnName="ModeloID" />
+          <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+          <ScalarProperty Name="TipoDispostivoID" ColumnName="TipoDispostivoID" />
+          <ScalarProperty Name="EstatusID" ColumnName="EstatusID" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Espesificaciones" ColumnName="Espesificaciones" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDispositivo">
+      <EntityTypeMapping TypeName="InventarioTIModel.TipoDispositivo">
+        <MappingFragment StoreEntitySet="TipoDispositivo">
+          <ScalarProperty Name="TipoDispositivoID" ColumnName="TipoDispositivoID" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,80 @@
+﻿@model AlmacenTI.Models.Dispositivo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Dispositivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Espesificaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Espesificaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaHora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaHora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asignacion.UsuarioAlta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asignacion.UsuarioAlta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo.Nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

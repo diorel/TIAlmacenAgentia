@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AlmacenTI.Models.Dispositivo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Espesificaciones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaHora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asignacion.UsuarioAlta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Espesificaciones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrecioCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaHora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asignacion.UsuarioAlta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DispositivoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DispositivoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DispositivoID })
+        </td>
+    </tr>
+}
+
+</table>
